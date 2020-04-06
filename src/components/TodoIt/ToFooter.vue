@@ -1,6 +1,6 @@
 <template>
   <div class="clearAllContainer">
-    <span class="clearAllBtn" @click="clickTodo">Clear All</span>
+    <span class="clearAllBtn" @click="clearTodo">Clear All</span>
   </div>
 </template>
 
@@ -8,7 +8,7 @@
   export default {
     methods: {
       clearTodo() {
-        localStorage.clear();
+        this.$emit('removeAll');
       }
     }
   };
@@ -22,9 +22,11 @@
     background-color: white;
     border-radius: 5px;
     margin: 0 auto;
+    margin-top: 3px;
   }
   .clearAllBtn {
     color: #e20303;
     display: black;
+    cursor: pointer;
   }
 </style>

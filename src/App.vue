@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <ToHeader />
-    <ToInput />
-    <ToList />
-    <ToFooter />
+    <ToInput v-on:addTodo="addTodo" />
+    <ToList v-bind:propsdata="todoItems" @removeTodo="removeTodo" />
+    <ToFooter @removeAll="clearAll" />
   </div>
 </template>
 
@@ -26,19 +26,45 @@
       ToFooter,
       ToInput,
       ToList
+    },
+    data() {
+      return {
+        todoItems: []
+      };
+    },
+    created() {
+      if (sessionStorage.length > 0) {
+        for (var i = 0; i < sessionStorage.length; i++) {
+          this.todoItems.push(sessionStorage.key(i));
+        }
+      }
+    },
+    methods: {
+      addTodo(todoItem) {
+        sessionStorage.setItem(todoItem, todoItem);
+        this.todoItems.push(todoItem);
+      },
+      clearAll() {
+        sessionStorage.clear();
+        this.todoItems = [];
+      },
+      removeTodo(todoItem, index) {
+        sessionStorage.removeItem(todoItem);
+        this.todoItems.splice(index, 1);
+      }
     }
   };
 </script>
 
-<style scoped>
-  #app {
+<style>
+  /* #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
-  }
+  } */
   body {
     text-align: center;
     background-color: #f6f6f8;

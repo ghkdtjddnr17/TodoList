@@ -1,28 +1,43 @@
 <template>
   <div class="inputBox shadow">
     <input type="text" v-model="newTodoItem" placeholder="일정을 입력하세요." @keyup.enter="addTodo" />
-    <span class="addContainer" @click="addTodo">
+    <span class="addContainer" @click="addTodo" style="cursor:pointer">
       <i class="addBtn fas fa-plus" aria-hidden="true"></i>
     </span>
+    <modal v-if="showModal" @close="showModal = false">
+      <h3 slot="header">경고</h3>
+      <span slot="footer" @click="showModal = false">
+        할 일을 입력하세요.
+        <i class="closeModalBtn fas fa-times" aria-hidden="true"></i>
+      </span>
+    </modal>
   </div>
 </template>
 
 <script>
+  import Modal from '@/components/common/Modal.vue';
   export default {
+    props: ['propsdata'],
     data() {
       return {
-        newTodoItem: ''
+        newTodoItem: '',
+        showModal: false
       };
+    },
+    components: {
+      Modal
     },
     methods: {
       addTodo() {
         if (this.newTodoItem !== '') {
           var value = this.newTodoItem && this.newTodoItem.trim();
-          localStorage.setItem(value, value);
+          this.$emit('addTodo', value);
           this.clearInput();
+        } else {
+          this.showModal = !this.showModal;
         }
         console.log(this.newTodoItem);
-        localStorage.setItem(this.newTodoItem, this.newTodoItem);
+        sessionStorage.setItem(this.newTodoItem, this.newTodoItem);
       },
       clearInput() {
         this.newTodoItem = '';
