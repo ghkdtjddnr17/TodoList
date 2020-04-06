@@ -1,28 +1,56 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <ToHeader />
+    <ToInput />
+    <ToList />
+    <ToFooter />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+  // import HelloWorld from './components/HelloWorld.vue';
+  // import Header from './components/Header';
+  // import Menu from './components/Menu';
+  // import Content from '@/components/Content';
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  //자기 관리 프로그램 컴포넌트
+  import ToHeader from './components/TodoIt/ToHeader';
+  import ToFooter from './components/TodoIt/ToFooter';
+  import ToInput from './components/TodoIt/ToInput';
+  import ToList from './components/TodoIt/ToList';
+
+  export default {
+    name: 'App',
+    components: {
+      ToHeader,
+      ToFooter,
+      ToInput,
+      ToList
+    }
+  };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 60px;
+  }
+  body {
+    text-align: center;
+    background-color: #f6f6f8;
+  }
+  input {
+    border-block-style: groove;
+    width: 200px;
+  }
+  button {
+    border-style: groove;
+  }
+  .shadow {
+    box-shadow: 5px 10px 10px rgb(0, 0, 0, 0.03);
+  }
 </style>
